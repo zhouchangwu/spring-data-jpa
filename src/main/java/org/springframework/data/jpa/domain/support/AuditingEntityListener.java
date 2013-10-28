@@ -19,6 +19,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect;
 import org.springframework.data.auditing.AuditingHandler;
 import org.springframework.data.domain.Auditable;
 
@@ -43,11 +44,19 @@ import org.springframework.data.domain.Auditable;
  * </pre>
  * 
  * @author Oliver Gierke
+ * @author Thomas Darimont
  */
 @Configurable
 public class AuditingEntityListener<T> {
 
 	private AuditingHandler<T> handler;
+
+	/**
+	 * Creates an {@link AuditingEntityListener} that configures
+	 */
+	public AuditingEntityListener() {
+		AnnotationBeanConfigurerAspect.aspectOf().configureBean(this);
+	}
 
 	/**
 	 * @param auditingHandler the handler to set

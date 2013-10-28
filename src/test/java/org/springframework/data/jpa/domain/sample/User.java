@@ -41,27 +41,20 @@ import javax.persistence.TemporalType;
 @NamedQuery(name = "User.findByEmailAddress", query = "SELECT u FROM User u WHERE u.emailAddress = ?1")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@Id @GeneratedValue(strategy = GenerationType.AUTO) private Integer id;
 	private String firstname;
 	private String lastname;
 	private int age;
 	private boolean active;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdAt;
+	@Temporal(TemporalType.TIMESTAMP) private Date createdAt;
 
-	@Column(nullable = false, unique = true)
-	private String emailAddress;
+	@Column(nullable = false, unique = true) private String emailAddress;
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	private Set<User> colleagues;
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }) private Set<User> colleagues;
 
-	@ManyToMany
-	private Set<Role> roles;
+	@ManyToMany private Set<Role> roles;
 
-	@ManyToOne
-	private User manager;
+	@ManyToOne private User manager;
 
 	/**
 	 * Creates a new empty instance of {@code User}.
